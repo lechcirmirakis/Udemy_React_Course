@@ -10,8 +10,6 @@ const person = (props) => {
             może to być zwykły teks, może to być kod JavaSvript albo inny component react itp... */}
             <p>{props.children}</p>
         </div>
-       
-        
         )
 }
 
