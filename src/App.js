@@ -9,13 +9,23 @@ class App extends Component {
       { name: "Lech", age: 34 },
       { name: "Malusinska", age: 30 },
       { name: "Andrzej", age: 45 }
-    ]
+    ],
+    otherState: "to jest jakis tam state"
   }
+
   // zarezerwowane slowo kluczowe dla komponentów zbudowanych tylko poprzez extends Component to 'State'
   // state zarzadza stanem componentu z jego wnetrza (zarzadza danymi componentu w jego wnetrzu)
 
   switchNameHandler = () => {
-    console.log("swithc");
+    
+    this.setState({
+      persons: 
+      [
+        { name: "Leszek Pisz", age: 34 },
+        { name: "Malusinska", age: 30 },
+        { name: "Andrzej", age: 16 }
+      ]
+    }) 
   }
 
   render() {
