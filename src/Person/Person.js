@@ -1,5 +1,7 @@
 import React from 'react';
 
+// Component zbudowany za pomoca zwyklej funkcji
+// dzieki propsom mozemy przekazywac wartosci do komponentu z zewnatrz
 const person = (props) => {
     return (
         <div>
