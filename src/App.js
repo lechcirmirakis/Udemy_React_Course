@@ -16,14 +16,14 @@ class App extends Component {
   // zarezerwowane slowo kluczowe dla komponentów zbudowanych tylko poprzez extends Component to 'State'
   // state zarzadza stanem componentu z jego wnetrza (zarzadza danymi componentu w jego wnetrzu)
 
-  switchNameHandler = () => {
+  switchNameHandler = (newName) => {
     
     this.setState({
       persons: 
       [
-        { name: "Leszek Pisz", age: 34 },
-        { name: "Malusinska", age: 30 },
-        { name: "Andrzej", age: 16 }
+        { name: newName, age: 34 },
+        { name: "Wioletta Marciniak", age: 12 },
+        { name: "Andrzej Gołota", age: 10 }
       ]
     }) 
   }
@@ -33,10 +33,17 @@ class App extends Component {
       <div className="App">
         <h1>Hi, I am React App :)</h1>
         <p>This is really working:</p>
-        <button onClick={this.switchNameHandler}>Switch Name</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>My hobby Is Raicing</Person>
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
+        <button onClick={() => this.switchNameHandler("Wojciech Kowalczyk")}>Switch Name</button>
+        <Person 
+            name={this.state.persons[0].name} 
+            age={this.state.persons[0].age} />
+        <Person 
+            name={this.state.persons[1].name} 
+            age={this.state.persons[1].age}
+            click={this.switchNameHandler.bind(this, "Maksymilian")}>My hobby Is Raicing</Person>
+        <Person 
+            name={this.state.persons[2].name} 
+            age={this.state.persons[2].age} />
       </div>
     )
 
