@@ -29,7 +29,13 @@ class App extends Component {
   }
 
   deletePersonHandler = (personIndex) => {
-    const persons = this.state.persons;
+    // uzywamy metody slice() która wyodrebia fragment tablicy i zwraca go jako nowa tablicy.
+    // bez tego do zmiennej persons przypisalibysmy (typy referencyjne tablica) ogrinalny stan aplikacji
+    // który jesli byłby pozniej zmieniony moglby prowadzić do nieprzewidywalnych sytuacji.
+    // lub np operatora rozproszenia ... który tez stworzy nowa tablice
+    // czyli zmieniajac stan zawsze robmy kopie i dopiero updajtujemy, bez zmianny orginalnego stanu
+    // const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({persons: persons});
   }
