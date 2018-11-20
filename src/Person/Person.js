@@ -23,7 +23,7 @@ const person = (props) => {
             {/* props children reprezentuje wszystko co się zawiera miedyz znacznikami danego componentu
             może to być zwykły teks, może to być kod JavaSvript albo inny component react itp... */}
             <p>{props.children}</p>
-            <input onChange={props.changed} value={props.name} type="text" />
+            <input onChange={props.change} value={props.name} type="text" />
         </div>
     )
 }
