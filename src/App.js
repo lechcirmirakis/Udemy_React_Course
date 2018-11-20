@@ -10,7 +10,8 @@ class App extends Component {
       { name: "Malusinska", age: 30 },
       { name: "Andrzej", age: 45 }
     ],
-    otherState: "to jest jakis tam state"
+    otherState: "to jest jakis tam state",
+    showPersons: false
   }
 
   // zarezerwowane slowo kluczowe dla komponentów zbudowanych tylko poprzez extends Component to 'State'
@@ -38,6 +39,11 @@ class App extends Component {
     })
   }
 
+  togglePersonHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({ showPersons: !doesShow })
+  }
+
   render() {
     const style = {
       backgroundColor: 'white',
@@ -52,19 +58,23 @@ class App extends Component {
         <h1>Hi, I am React App :)</h1>
         <p>This is really working:</p>
         <button
-          style={style} 
-          onClick={() => this.switchNameHandler("Wojciech Kowalczyk")}>Switch Name</button>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age} />
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, "Maksymilian")}
-          changed={this.nameChangedHandler}>My hobby Is Raicing</Person>
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age} />
+          style={style}
+          onClick={this.togglePersonHandler}>Switch Toggle</button>
+        {this.state.showPersons ?
+          <div>
+            <Person
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age} />
+            <Person
+              name={this.state.persons[1].name}
+              age={this.state.persons[1].age}
+              click={this.switchNameHandler.bind(this, "Maksymilian")}
+              changed={this.nameChangedHandler}>My hobby Is Raicing</Person>
+            <Person
+              name={this.state.persons[2].name}
+              age={this.state.persons[2].age} />
+          </div> : null
+        }
       </div>
     )
 
