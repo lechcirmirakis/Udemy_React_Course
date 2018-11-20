@@ -6,9 +6,9 @@ import Person from './Person/Person.js';
 class App extends Component {
   state = {
     persons: [
-      { name: "Lech", age: 34 },
-      { name: "Malusinska", age: 30 },
-      { name: "Andrzej", age: 45 }
+      { id: 1, name: "Lech", age: 34 },
+      { id: 2, name: "Malusinska", age: 30 },
+      { id: 3, name: "Andrzej", age: 45 }
     ],
     otherState: "to jest jakis tam state",
     showPersons: false
@@ -55,6 +55,9 @@ class App extends Component {
     };
 
     let persons = null;
+    // wlasciwosc key={} powinno sie dopisywać zeby kazdy komponent mial swoj unikalny indentyfikator
+    // dzieki czemu react dokladnie wiec ktory element kakretnie sie zmienil. lepsza wydajnosc przy np bardzo 
+    // dlugich listach
     
     if (this.state.showPersons) {
       persons = (
@@ -65,6 +68,7 @@ class App extends Component {
                 click = {() => this.deletePersonHandler(index)}
                 name={person.name}
                 age={person.age}
+                key={person.id}
                 />
             })
           }
