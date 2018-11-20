@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person.js';
-import person from './Person/Person.js';
 
 // Component zbudowany za pomoca dziedziczenia z Reactowego Objectu Component
 class App extends Component {
@@ -18,17 +17,6 @@ class App extends Component {
   // zarezerwowane slowo kluczowe dla komponentów zbudowanych tylko poprzez extends Component to 'State'
   // state zarzadza stanem componentu z jego wnetrza (zarzadza danymi componentu w jego wnetrzu)
 
-  switchNameHandler = (newName) => {
-    this.setState({
-      persons:
-        [
-          { name: newName, age: 34 },
-          { name: "Wioletta Marciniak", age: 12 },
-          { name: "Andrzej Gołota", age: 10 }
-        ]
-    })
-  }
-
   nameChangedHandler = (event) => {
     this.setState({
       persons:
@@ -38,6 +26,12 @@ class App extends Component {
           { name: "Andrzej Gołota", age: 45 }
         ]
     })
+  }
+
+  deletePersonHandler = (personIndex) => {
+    const persons = this.state.persons;
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons});
   }
 
   togglePersonHandler = () => {
@@ -60,8 +54,9 @@ class App extends Component {
       persons = (
         <div>
           {
-            this.state.persons.map(person => {
+            this.state.persons.map((person, index) => {
               return <Person
+                click = {() => this.deletePersonHandler(index)}
                 name={person.name}
                 age={person.age}
                 />

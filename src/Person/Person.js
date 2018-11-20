@@ -11,7 +11,6 @@ import './Person.css';
 // przyjumuja jakies dane poprzez propsy, mozemy donich dopisywac logike i renderujemy dzieki
 // nim component w domie (dynamicznie)!!, ale te componenty nie zmieniaja stanu naszej aplikacji!!!!
 
-
 // Stan aplikacji powinien zmieniac sie tylko w kilku głownych komponentach, które mozna nazwac kontenerami
 
 // mozemy przekazac poprzez propsy do komponentu rowniez metode z componentu "wyzszego", 
