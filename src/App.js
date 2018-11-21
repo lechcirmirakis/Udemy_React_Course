@@ -8,7 +8,8 @@ class App extends Component {
     persons: [
       { id: 2, name: "Lech", age: 34 },
       { id: 3, name: "Malusinska", age: 30 },
-      { id: 4, name: "Andrzej", age: 45 }
+      { id: 4, name: "Andrzej", age: 45 },
+      { id: 5, name: "Anna", age: 34 }
     ],
     otherState: "to jest jakis tam state",
     showPersons: false
@@ -18,24 +19,24 @@ class App extends Component {
   // state zarzadza stanem componentu z jego wnetrza (zarzadza danymi componentu w jego wnetrzu)
 
   nameChangedHandler = (event, id) => {
-    // najpier szukamy konkretnej osoby (id tej osoby) której value name chcemy zmienić poprzez pisanie w inpucie
-    // find() dziala podobnie jak map, czyli dla kazdego elementu tablicy wykonuje ta samom czynnosc, w tym 
+    // najpier szukamy konkretnej osoby (id z arrayki tej osoby) której value name chcemy zmienić poprzez pisanie w inpucie
+    // findIndex() dziala podobnie jak map, czyli dla kazdego elementu tablicy wykonuje ta samom czynnosc, w tym 
     // wypadku sprawdza czy id tablicy zgadza sie z id przekazanym do funkcjii zwraca true albo false
 
     const personIndex = this.state.persons.findIndex(el => {
       return el.id === id;
     })
-    console.log(personIndex);
+  
     // tworzymy kopie konkretnego obiektu (osoby) do zmiany stanu
     const person = {
       ...this.state.persons[personIndex]
     }
-    console.log(person)
     // przypisujemy do imienia danej osoby value lapane przez event czyli:
     person.name = event.target.value;
 
     // znowu tworzymy kopie tablicy persons
     const persons = [...this.state.persons];
+
     // aktualizujemy ja o zmiane przeprowadzoną po evencie (zmiane name)
     persons[personIndex] = person;
 
@@ -62,7 +63,8 @@ class App extends Component {
 
   render() {
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -89,7 +91,9 @@ class App extends Component {
             })
           }
         </div>
-      )
+      );
+
+      style.backgroundColor = "red"
     }
 
     return (
@@ -98,7 +102,7 @@ class App extends Component {
         <p>This is really working:</p>
         <button
           style={style}
-          onClick={this.togglePersonHandler}>Switch Toggle</button>
+          onClick={this.togglePersonHandler}>Persons toggle</button>
         {persons}
       </div>
     )
