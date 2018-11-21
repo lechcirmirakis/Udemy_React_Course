@@ -1,4 +1,4 @@
-import Radium from 'radium';
+import Radium, { StyleRoot } from 'radium';
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person.js';
@@ -107,22 +107,24 @@ class App extends Component {
 
     const classes = [];
 
-    if(this.state.persons.length <= 2) {
+    if (this.state.persons.length <= 2) {
       classes.push('red');
     }
-    if(this.state.persons.length <= 1) {
+    if (this.state.persons.length <= 1) {
       classes.push('bold');
     }
 
     return (
-      <div className="App">
-        <h1>React App </h1>
-        <p className={classes.join(' ')}>This is really working:</p>
-        <button
-          style={style}
-          onClick={this.togglePersonHandler}>Persons toggle</button>
-        {persons}
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1>React App </h1>
+          <p className={classes.join(' ')}>This is really working:</p>
+          <button
+            style={style}
+            onClick={this.togglePersonHandler}>Persons toggle</button>
+          {persons}
+        </div>
+      </StyleRoot>
     )
 
     // return  React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi I am React Header 1'))
