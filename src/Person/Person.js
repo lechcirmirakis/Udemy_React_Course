@@ -1,4 +1,3 @@
-import Radium from 'radium';
 import React from 'react';
 import './Person.css';
 
@@ -18,13 +17,8 @@ import './Person.css';
 // dzieki temu mozemy wywolac metode w komponencie ktory niema bezposrednio dostepu do stanu aplikacji
 
 const person = (props) => {
-    const style = {
-        '@media(min-width: 500px)': {
-            width: '450px'
-        }
-    }
     return (
-        <div className="Person" style={style}>
+        <div className="Person">
             <p onClick={props.click}>I`m a {props.name} and i have a {props.age} years old</p>
             {/* props children reprezentuje wszystko co się zawiera miedyz znacznikami danego componentu
             może to być zwykły teks, może to być kod JavaSvript albo inny component react itp... */}
@@ -34,4 +28,4 @@ const person = (props) => {
     )
 }
 
-export default Radium(person);
+export default person;
