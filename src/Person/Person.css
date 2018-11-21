@@ -6,3 +6,15 @@
     padding: 16px;
     text-align: center;
 }
+
+.Person input {
+    max-width: 170px;
+    width: 80%;
+}
+
+@media (min-width: 500px) {
+    .Person {
+        width: 450px;
+        background-color: #ccc;
+    }
+}
