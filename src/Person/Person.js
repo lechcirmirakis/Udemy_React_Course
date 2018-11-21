@@ -1,5 +1,5 @@
 import React from 'react';
-import './Person.css';
+import classes from './Person.css';
 
 // Component zbudowany za pomoca zwyklej funkcji
 // dzieki propsom mozemy przekazywac wartosci do komponentu z zewnatrz
@@ -18,7 +18,7 @@ import './Person.css';
 
 const person = (props) => {
     return (
-        <div className="Person">
+        <div className={classes.Person}>
             <p onClick={props.click}>I`m a {props.name} and i have a {props.age} years old</p>
             {/* props children reprezentuje wszystko co się zawiera miedyz znacznikami danego componentu
             może to być zwykły teks, może to być kod JavaSvript albo inny component react itp... */}
