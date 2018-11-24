@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import classes from './Person.css';
 
 // Component zbudowany za pomoca zwyklej funkcji
@@ -15,16 +15,18 @@ import classes from './Person.css';
 // mozemy przekazac poprzez propsy do komponentu rowniez metode z componentu "wyzszego", 
 // dzieki temu mozemy wywolac metode w komponencie ktory niema bezposrednio dostepu do stanu aplikacji
 
-const person = (props) => {
-    return (
-        <div className={classes.Person}>
-            <p onClick={props.click}>I`m a {props.name} and i have a {props.age} years old</p>
+class Person extends Component {
+    render () {
+        return (
+            <div className={classes.Person}>
+            <p onClick={this.props.click}>I`m a {this.props.name} and i have a {this.props.age} years old</p>
             {/* props children reprezentuje wszystko co się zawiera miedzy znacznikami danego componentu
             może to być zwykły tekst, może to być kod JavaSvript albo inny component react itp... */}
-            <p>{props.children}</p>
-            <input onChange={props.change} value={props.name} type="text" />
+            <p>{this.props.children}</p>
+            <input onChange={this.props.change} value={this.props.name} type="text" />
         </div>
-    )
-}
+        )
+    }
+} 
 
-export default person;
+export default Person;
