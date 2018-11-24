@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classes from './App.css';
-import Person from './Person/Person.js';
+import Person from '../components/Persons/Person/Person.js';
 
 // Component zbudowany za pomoca dziedziczenia z Reactowego Objectu Component
 class App extends Component {
@@ -90,7 +90,6 @@ class App extends Component {
     }
 
     
-
     const assignedClasses = [];
 
     if (this.state.persons.length <= 2) {

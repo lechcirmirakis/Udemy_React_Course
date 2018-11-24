@@ -6,7 +6,6 @@ import classes from './Person.css';
 // ale jak ze nie jest to component zbudowany przez extend z klasy component, nie mozemy
 // uzywajć tu statów
 
-
 // powinnismy jak najwiecej uzywac tej metody do tworzenia komponentów. Sa to komponetny ktore 
 // przyjumuja jakies dane poprzez propsy, mozemy donich dopisywac logike i renderujemy dzieki
 // nim component w domie (dynamicznie)!!, ale te componenty nie zmieniaja stanu naszej aplikacji!!!!
@@ -20,8 +19,8 @@ const person = (props) => {
     return (
         <div className={classes.Person}>
             <p onClick={props.click}>I`m a {props.name} and i have a {props.age} years old</p>
-            {/* props children reprezentuje wszystko co się zawiera miedyz znacznikami danego componentu
-            może to być zwykły teks, może to być kod JavaSvript albo inny component react itp... */}
+            {/* props children reprezentuje wszystko co się zawiera miedzy znacznikami danego componentu
+            może to być zwykły tekst, może to być kod JavaSvript albo inny component react itp... */}
             <p>{props.children}</p>
             <input onChange={props.change} value={props.name} type="text" />
         </div>
