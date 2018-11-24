@@ -6,6 +6,19 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 // Component zbudowany za pomoca dziedziczenia z Reactowego Objectu Component
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log('[App.js] Inside Constructor', props)
+  }
+
+    componentWillMount() {
+      console.log('[App.js] Inside componentWillMount()');
+    }
+
+    componentDidMount() {
+      console.log('[App.js] Inside componentDidMount()');
+    }
+
   state = {
     persons: [
       { id: 2, name: "Lech", age: 34 },
@@ -64,6 +77,8 @@ class App extends Component {
   }
 
   render() {
+    console.log('[App.js] Inside Render()');
+    
     let persons = null;
     // wlasciwosc key={} powinno sie dopisywać zeby kazdy komponent mial swoj unikalny indentyfikator
     // dzieki czemu react dokladnie wiec ktory element kakretnie sie zmienil. lepsza wydajnosc przy np bardzo 
