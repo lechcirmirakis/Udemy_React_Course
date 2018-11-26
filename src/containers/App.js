@@ -11,13 +11,32 @@ class App extends Component {
     console.log('[App.js] Inside Constructor', props)
   }
 
-    componentWillMount() {
-      console.log('[App.js] Inside componentWillMount()');
-    }
+  componentWillMount() {
+    console.log('[App.js] Inside componentWillMount()');
+  }
 
-    componentDidMount() {
-      console.log('[App.js] Inside componentDidMount()');
-    }
+  componentDidMount() {
+    console.log('[App.js] Inside componentDidMount()');
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // Metoda ta musi zwracać true lub false. Jesli zwracamy true proces update jest kontynułowany, jesli false
+    // zatrzymujemy cały proces aktualizacji czyli dalszego cyklu czyli np render()
+
+    console.log('[UPDATE App.js] Inside should ComponentUpdate', nextProps, nextState);
+    // to samo co w persons.js sprawdzamy czy state się zmienił, jeśli nie to nie wykonujemy dalszych
+    // instrukcji z cyklu zycia komponentu (wydajność)!
+    return nextState.persons !== this.state.persons ||
+      nextState.showPersons !== this.state.showPersons;
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log('[UPDATE App.js] Inside componentWillUpdate', nextProps, nextState);
+  }
+
+  componentDidUpdate() {
+    console.log('[UPDATE App.js] Inside componentDidUpdate');
+  }
 
   state = {
     persons: [
@@ -78,7 +97,7 @@ class App extends Component {
 
   render() {
     console.log('[App.js] Inside Render()');
-    
+
     let persons = null;
     // wlasciwosc key={} powinno sie dopisywać zeby kazdy komponent mial swoj unikalny indentyfikator
     // dzieki czemu react dokladnie wiec ktory element kakretnie sie zmienil. lepsza wydajnosc przy np bardzo 
@@ -94,8 +113,9 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
+        <button onClick={() => { this.setState({ showPersons: true }) }}>Show Persons</button>
         <Cockpit
-          appTitle = {this.props.title}
+          appTitle={this.props.title}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
           click={this.togglePersonHandler}

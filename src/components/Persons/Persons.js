@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Person from './Person/Person';
 
 // bedzie componenten zrobionym za pomocą funkcji bo nie zmieniamy i nie potrzebujemy tutaj state
-class Persons extends Component {
+class Persons extends PureComponent {
     constructor(props) {
         super(props);
         console.log('[Persons.js] Inside Constructor', props)
@@ -20,13 +20,23 @@ class Persons extends Component {
         console.log('[UPDATE Persons.js] inside componentWillReceiveProps', nextProps);
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        // Metoda ta musi zwracać true lub false. Jesli zwracamy true proces update jest kontynułowany, jesli false
-        // zatrzymujemy cały proces aktualizacji czyli dalszego cyklu czyli np render()
+    // Metoda ta musi zwracać true lub false. Jesli zwracamy true proces update jest kontynułowany, jesli false
+    // zatrzymujemy cały proces aktualizacji czyli dalszego cyklu czyli np render()
 
-        console.log('[UPDATE Persons.js] Inside should ComponentUpdate', nextProps, nextState);
-        return nextProps.persons !== this.props.persons;
-    }
+    // sprawdzamy czy które kolwiek z wywoływanych na prosons metod została zmieniona (poprzez porównanie propsów).
+    // jeśli nie zostały zmienione to react nie wykonuje dalej kolejnych etapów renderowania i aktualizacji componentu 
+    // jest to dobra praktyka jesli mamy duza aplikacje i rozwiazuje problem z wydajnością
+
+    // mozemy również to co jest podspodem zakomentowane zrobić extendujac komponent jako Pure Component, wtedy 
+    // sam react sprawdza czy state/propsy zostały z aktualizowane i jesli  nie sa to nie renderuje dalej tresci
+
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log('[UPDATE Persons.js] Inside should ComponentUpdate', nextProps, nextState);
+        
+    //     return nextProps.persons !== this.props.persons ||
+    //     nextProps.changed !== this.props.changed ||
+    //     nextProps.clicked !== this.props.clicked;
+    // }
 
     componentWillUpdate(nextProps, nextState) {
         console.log('[UPDATE Persons.js] Inside componentWillUpdate', nextProps, nextState);
