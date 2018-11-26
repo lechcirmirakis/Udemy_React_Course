@@ -12,15 +12,20 @@ import React, { Component } from 'react';
 
 // powyżej zwracamy funkcje, poniżej jakos component stworzony za pomoca extends
 const wrappClass = (WrappedComponent, className) => {
-    return class extends Component {
-        render () {
+    const WrappClass = class extends Component {
+        render() {
             return (
                 <div className={className}>
-                    <WrappedComponent {...this.props} />
+                    <WrappedComponent ref={this.props.forwardRef} {...this.props} />
                 </div>
             )
         }
     }
+
+    // tworzenie tunelu z propsami przez komponent w który "opatulamy wszystkie nasze Persony"
+    return React.forwardRef((props, ref) => {
+        return <WrappClass {...props} forwardRef={ref} />
+    });
 }
 
 export default wrappClass;

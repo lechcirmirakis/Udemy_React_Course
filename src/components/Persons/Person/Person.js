@@ -23,7 +23,8 @@ import wrappClass from '../../../hoc/WrappClass';
 class Person extends Component {
     constructor(props) {
         super(props);
-        console.log('[Person.js] Inside Constructor', props)
+        console.log('[Person.js] Inside Constructor', props);
+        this.inputElement = React.createRef(); // stworzenie referencji w React 16 mozemy to juz zrobić w konstruktorze
     }
 
     componentWillMount() {
@@ -32,11 +33,15 @@ class Person extends Component {
 
     componentDidMount() {
         console.log('[Person.js] Inside componentDidMount()');
-
         // tutaj mozemy korzystać z referencji poniewaz ta metoda wywołuje sie juz po renderze componentu
         if (this.props.position === 0) {
-            this.inputElement.focus();
+            //this.inputElement.focus(); // gdy dodamy referencje w render()
+            this.inputElement.current.focus() // gdy dodamy referencje w konstruktorze (musimy dodać current)
         }
+    }
+
+    focus() {
+        this.inputElement.current.focus() 
     }
 
     render() {
@@ -49,8 +54,9 @@ class Person extends Component {
                 <p>{this.props.children}</p>
                 <input
                     // referencje dostępne sa tylko w koponentach stworzonych za pomoca extends
-                    // mozemy dodawać w renderowaniu nowe własciwosci dla klasy
-                    ref={(inp) => { this.inputElement = inp }}
+                    // mozemy dodawać (tworzyć) w renderowaniu nowe własciwosci dla klasy
+                    // ref={(inp) => { this.inputElement = inp }} - dodana referencja
+                    ref={this.inputElement}
                     onChange={this.props.change}
                     value={this.props.name}
                     type="text"
