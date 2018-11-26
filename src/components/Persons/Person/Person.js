@@ -32,17 +32,29 @@ class Person extends Component {
 
     componentDidMount() {
         console.log('[Person.js] Inside componentDidMount()');
+
+        // tutaj mozemy korzystać z referencji poniewaz ta metoda wywołuje sie juz po renderze componentu
+        if (this.props.position === 0) {
+            this.inputElement.focus();
+        }
     }
 
-    render () {
+    render() {
         console.log('[Person.js] Inside Render()');
         return (
             <Auxiliary>
                 <p onClick={this.props.click}>I`m a {this.props.name} and i have a {this.props.age} years old</p>
-                    {/* props children reprezentuje wszystko co się zawiera miedzy znacznikami danego componentu
+                {/* props children reprezentuje wszystko co się zawiera miedzy znacznikami danego componentu
                     może to być zwykły tekst, może to być kod JavaSvript albo inny component react itp... */}
                 <p>{this.props.children}</p>
-                <input onChange={this.props.change} value={this.props.name} type="text" />
+                <input
+                    // referencje dostępne sa tylko w koponentach stworzonych za pomoca extends
+                    // mozemy dodawać w renderowaniu nowe własciwosci dla klasy
+                    ref={(inp) => { this.inputElement = inp }}
+                    onChange={this.props.change}
+                    value={this.props.name}
+                    type="text"
+                />
             </Auxiliary>
         )
 
@@ -54,7 +66,7 @@ class Person extends Component {
         //     <input key="3" onChange={this.props.change} value={this.props.name} type="text" />,
         // ]
     }
-} 
+}
 
 
 // walidacja typów zmiennych, dzieki dodatkowej bibliotece propTypes możemy ustalać konkretne rodzaje danych 
@@ -65,7 +77,7 @@ Person.propTypes = {
     click: PropTypes.func,
     name: PropTypes.string,
     age: PropTypes.number,
-    change:PropTypes.func
+    change: PropTypes.func
 };
 
 export default wrappClass(Person, classes.Person);
