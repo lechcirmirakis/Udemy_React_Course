@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classes from './Person.css';
-
+import WithClass from '../../../hoc/WithClass';
 // Component zbudowany za pomoca zwyklej funkcji
 // dzieki propsom mozemy przekazywac wartosci do komponentu z zewnatrz
 // ale jak ze nie jest to component zbudowany przez extend z klasy component, nie mozemy
@@ -32,13 +32,13 @@ class Person extends Component {
     render () {
         console.log('[Person.js] Inside Render()');
         return (
-            <div className={classes.Person}>
-            <p onClick={this.props.click}>I`m a {this.props.name} and i have a {this.props.age} years old</p>
-            {/* props children reprezentuje wszystko co się zawiera miedzy znacznikami danego componentu
-            może to być zwykły tekst, może to być kod JavaSvript albo inny component react itp... */}
-            <p>{this.props.children}</p>
-            <input onChange={this.props.change} value={this.props.name} type="text" />
-        </div>
+            <WithClass classes={classes.Person}>
+                <p onClick={this.props.click}>I`m a {this.props.name} and i have a {this.props.age} years old</p>
+                    {/* props children reprezentuje wszystko co się zawiera miedzy znacznikami danego componentu
+                    może to być zwykły tekst, może to być kod JavaSvript albo inny component react itp... */}
+                <p>{this.props.children}</p>
+                <input onChange={this.props.change} value={this.props.name} type="text" />
+            </WithClass>
         )
 
         // jeśli chcemy uniknąć opakowywania elementów w jeden główny element przy returnie, mozemy zrobić to za 
