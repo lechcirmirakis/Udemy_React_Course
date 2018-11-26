@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import classes from './Person.css';
 import WithClass from '../../../hoc/WithClass';
 import Auxiliary from '../../../hoc/Auxiliary';
@@ -53,5 +55,17 @@ class Person extends Component {
         // ]
     }
 } 
+
+
+// walidacja typów zmiennych, dzieki dodatkowej bibliotece propTypes możemy ustalać konkretne rodzaje danych 
+// dla propsów. np ustaliliśmy że age musi być numberem, jesi wpiszemy string wyskoczy błąd. Przydatne
+// gdy piszemy aplikacje w pare osób i ktoś inny może korzystać z naszego zbudowanego komponentu
+
+Person.propTypes = {
+    click: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number,
+    change:PropTypes.func
+};
 
 export default wrappClass(Person, classes.Person);
