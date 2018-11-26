@@ -10,7 +10,18 @@ import wrappClass from '../hoc/WrappClass';
 class App extends Component {
   constructor(props) {
     super(props);
-    console.log('[App.js] Inside Constructor', props)
+    console.log('[App.js] Inside Constructor', props);
+    this.state = {
+      persons: [
+        { id: 2, name: "Lech", age: 34 },
+        { id: 3, name: "Malusinska", age: 30 },
+        { id: 4, name: "Andrzej", age: 45 },
+        { id: 5, name: "Anna", age: 34 }
+      ],
+      otherState: "to jest jakis tam state",
+      showPersons: false,
+      toggleClicked: 0
+    }
   }
 
   componentWillMount() {
@@ -38,17 +49,6 @@ class App extends Component {
 
   componentDidUpdate() {
     console.log('[UPDATE App.js] Inside componentDidUpdate');
-  }
-
-  state = {
-    persons: [
-      { id: 2, name: "Lech", age: 34 },
-      { id: 3, name: "Malusinska", age: 30 },
-      { id: 4, name: "Andrzej", age: 45 },
-      { id: 5, name: "Anna", age: 34 }
-    ],
-    otherState: "to jest jakis tam state",
-    showPersons: false
   }
 
   // zarezerwowane slowo kluczowe dla komponentów zbudowanych tylko poprzez extends Component to 'State'
@@ -94,7 +94,16 @@ class App extends Component {
 
   togglePersonHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({ showPersons: !doesShow })
+
+    // lepszy sposób mutowani stanu (dopisujemy prevState i do niego sie odwołujemy czyli do poprzadniego statu
+    // przed kliknieciem)
+    
+    this.setState((prevState, props) => {
+        return {
+          showPersons: !doesShow,
+          toggleClicked: prevState.toggleClicked + 1
+        } 
+      });
   }
 
   render() {
