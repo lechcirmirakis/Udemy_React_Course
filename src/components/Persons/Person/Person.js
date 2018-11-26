@@ -40,6 +40,14 @@ class Person extends Component {
             <input onChange={this.props.change} value={this.props.name} type="text" />
         </div>
         )
+
+        // jeśli chcemy uniknąć opakowywania elementów w jeden główny element przy returnie, mozemy zrobić to za 
+        // pomocą tablicy (jak w przykladzie pod spodem), dodajemy key na sztywno do kazdego elementu
+        // return [
+        //     <p key="1" onClick={this.props.click}>I`m a {this.props.name} and i have a {this.props.age} years old</p>,
+        //     <p key="2">{this.props.children}</p>,
+        //     <input key="3" onChange={this.props.change} value={this.props.name} type="text" />,
+        // ]
     }
 } 
 
