@@ -6,6 +6,9 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import Auxiliary from '../hoc/Auxiliary';
 import wrappClass from '../hoc/WrappClass';
 
+// tworzymy konteks globalny który mozemy przekazywać 
+export const AuthContext = React.createContext();
+
 // Component zbudowany za pomoca dziedziczenia z Reactowego Objectu Component
 class App extends Component {
   constructor(props) {
@@ -20,7 +23,8 @@ class App extends Component {
       ],
       otherState: "to jest jakis tam state",
       showPersons: false,
-      toggleClicked: 0
+      toggleClicked: 0,
+      authenticade: false
     }
   }
 
@@ -97,13 +101,17 @@ class App extends Component {
 
     // lepszy sposób mutowani stanu (dopisujemy prevState i do niego sie odwołujemy czyli do poprzadniego statu
     // przed kliknieciem)
-    
+
     this.setState((prevState, props) => {
-        return {
-          showPersons: !doesShow,
-          toggleClicked: prevState.toggleClicked + 1
-        } 
-      });
+      return {
+        showPersons: !doesShow,
+        toggleClicked: prevState.toggleClicked + 1
+      }
+    });
+  }
+
+  loginHandler = () => {
+    this.setState({ authenticade: true });
   }
 
   render() {
@@ -130,8 +138,14 @@ class App extends Component {
           showPersons={this.state.showPersons}
           persons={this.state.persons}
           click={this.togglePersonHandler}
+          login={this.loginHandler}
         />
-        {persons}
+
+        {/* udostępniamy (provider) AuthConteks do wszystkich dzieci (nieważne na którym lewelu się one znajduą)
+         tej clasy czyli do wszystkich persons */}
+        <AuthContext.Provider value={this.state.authenticade}>
+          {persons}
+        </AuthContext.Provider>
       </Auxiliary>
     )
 

@@ -5,6 +5,8 @@ import classes from './Person.css';
 import WithClass from '../../../hoc/WithClass';
 import Auxiliary from '../../../hoc/Auxiliary';
 import wrappClass from '../../../hoc/WrappClass';
+// importujemy globalny context z app.js
+import { AuthContext } from '../../../containers/App';
 
 // Component zbudowany za pomoca zwyklej funkcji
 // dzieki propsom mozemy przekazywac wartosci do komponentu z zewnatrz
@@ -41,13 +43,17 @@ class Person extends Component {
     }
 
     focus() {
-        this.inputElement.current.focus() 
+        this.inputElement.current.focus()
     }
 
     render() {
         console.log('[Person.js] Inside Render()');
-        return (
+        return (               
             <Auxiliary>
+                {/* pobieramy state login z glownego komponentu poprzez kontekst tutaj jako consumer */}
+                <AuthContext.Consumer>
+                    {auth => auth ? <p>Jestem Zalogowany</p> : null}
+                </AuthContext.Consumer>
                 <p onClick={this.props.click}>I`m a {this.props.name} and i have a {this.props.age} years old</p>
                 {/* props children reprezentuje wszystko co się zawiera miedzy znacznikami danego componentu
                     może to być zwykły tekst, może to być kod JavaSvript albo inny component react itp... */}
