@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import WithClass from '../hoc/WithClass';
+import Auxiliary from '../hoc/Auxiliary';
+import wrappClass from '../hoc/WrappClass';
 
 // Component zbudowany za pomoca dziedziczenia z Reactowego Objectu Component
 class App extends Component {
@@ -113,7 +114,7 @@ class App extends Component {
     }
 
     return (
-      <WithClass classes={classes.App}>
+      <Auxiliary classes={classes.App}>
         <button onClick={() => { this.setState({ showPersons: true }) }}>Show Persons</button>
         <Cockpit
           appTitle={this.props.title}
@@ -122,11 +123,12 @@ class App extends Component {
           click={this.togglePersonHandler}
         />
         {persons}
-      </WithClass>
+      </Auxiliary>
     )
 
     // return  React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi I am React Header 1'))
   }
 }
-
-export default App;
+// "opakowywujemy" component App w funkcje wrappClass która przyjmuje dwa parametry, zwracany component i className
+// dla zwracanego komponentu
+export default wrappClass(App, classes.App);
